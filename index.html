@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Script SQL de Versiones</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>  <!-- Enlace a la biblioteca Axios para realizar solicitudes HTTP -->
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Script SQL de Versiones</h1>
+        <button id="generateBtn">Generar Script SQL</button>
+        <p id="status"></p>
+    </div>
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = 'Generando script SQL...';
+
+            try {
+                // Hacer una solicitud POST a la ruta '/generate-sql-script' usando Axios
+                const response = await axios.post('/generate-sql-script', { responseType: 'blob' });
+                if (response.status === 200) {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'versionesSql.sql');
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    statusElement.textContent = 'Script SQL generado exitosamente.';
+                } else {
+                    statusElement.textContent = 'Error al generar el script SQL.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                statusElement.textContent = 'Error al comunicarse con el servidor.';
+            }
+        });
+    </script>
+</body>
+</html>
