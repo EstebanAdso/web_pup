@@ -5,16 +5,16 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "npx puppeteer install",
     "postinstall": "npx puppeteer install chrome"
-}
-,
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "puppeteer": "^22.15.0",
-    "express": "^4.17.1"
+    "axios": "^1.7.3",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.17.1",
+    "puppeteer": "^22.15.0"
   }
 }
