@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer from 'puppeteer';
 
 export async function getDataFromWebPage() {
     let browser;
@@ -7,6 +7,7 @@ export async function getDataFromWebPage() {
         browser = await puppeteer.launch({
             headless: false,
             slowMo: 400,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],// Argumentos adicionales para Puppeteer
             executablePath: puppeteer.executablePath()
         });
         const page = await browser.newPage();

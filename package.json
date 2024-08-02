@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "npx puppeteer install"
+    "postinstall": "npx puppeteer install",
+    "postinstall": "npx puppeteer install chrome"
 }
 ,
   "keywords": [],
