@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";                                                               //importa puppeteer para scrapear la pagina.
+import puppeteer from "puppeteer";
 
 export async function getDataFromWebPage() {
     let browser;
@@ -6,7 +6,8 @@ export async function getDataFromWebPage() {
         console.log("Iniciando el navegador...");
         browser = await puppeteer.launch({
             headless: false,
-            slowMo: 400
+            slowMo: 400,
+            executablePath: puppeteer.executablePath()
         });
         const page = await browser.newPage();
         console.log("Navegando a la página...");
@@ -75,8 +76,6 @@ export async function getDataFromWebPage() {
             throw new Error("No se obtuvieron datos de la página");
         }
 
-        await browser.close();
-
         let fullSqlScript = "USE VersionSql;\n\n";
         fullSqlScript += `IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='versionesSql' AND xtype='U')
             BEGIN
@@ -119,7 +118,7 @@ export async function getDataFromWebPage() {
         }
     }
 }
-// Si este módulo se está ejecutando directamente, llama a getDataFromWebPage y muestra el resultado
+
 if (import.meta.url === `file://${process.argv[1]}`) {
     getDataFromWebPage().then(result => console.log(result));
 }
