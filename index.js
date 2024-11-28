@@ -1,6 +1,6 @@
-import puppeteer from 'puppeteer';
 import axios from 'axios';
 import cheerio from 'cheerio';
+
 
 export async function getDataFromWebPage() {
     try {
@@ -99,3 +99,4 @@ export async function getDataFromWebPage() {
         return { success: false, error: error.message };
     }
 }
+
